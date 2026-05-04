@@ -12,6 +12,16 @@ import award4 from "@/assets/img/awards/UK-Content-Awards-White.webp";
 import Image from "next/image";
 import HeadingWithImage from "@/components/shared/heading-with-image";
 
+import brand1 from "@/assets/img/brands/gogle.webp";
+import brand2 from "@/assets/img/brands/chat-gpt.webp";
+import brand3 from "@/assets/img/brands/gemini.webp";
+import brand4 from "@/assets/img/brands/tiktok.webp";
+import brand5 from "@/assets/img/brands/youtube.webp";
+import brand6 from "@/assets/img/brands/pinterest.webp";
+import brand7 from "@/assets/img/brands/giphy.webp";
+import brand8 from "@/assets/img/brands/reddit.webp";
+import brand9 from "@/assets/img/brands/amazon.webp";
+
 const Hero = () => {
   const heroBgs = [hero1, hero2, hero3];
 
@@ -19,6 +29,8 @@ const Hero = () => {
   const heroBg = heroBgs[Math.floor(Math.random() * heroBgs.length)];
 
   const awards = [award1, award2, award3, award4];
+
+  const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9];
 
   return (
     <section className="px-2 pt-2">
@@ -29,7 +41,7 @@ const Hero = () => {
           height: "calc(100dvh - 0.5rem)",
         }}
       >
-        <div className="size-full backdrop-blur-md backdrop-brightness-75 flex flex-col justify-center items-center px-4 text-center">
+        <div className="size-full backdrop-blur-md backdrop-brightness-75 flex flex-col justify-center items-center px-4 text-center relative">
           <span className="uppercase text-xs font-medium leading-tight tracking-tightish max-w-52 text-balance text-center mb-2 text-white">
             #1 Most recommended content marketing agency
           </span>
@@ -40,7 +52,7 @@ const Hero = () => {
                 <Image
                   src={award.src}
                   alt={`Award ${idx + 1}`}
-                  width={48}
+                  width={68}
                   height={24}
                   className="w-full h-full max-h-6 object-contain"
                   loading="lazy"
@@ -58,7 +70,36 @@ const Hero = () => {
             className="text-center"
             textClassName="text-white text-[120px] font-semibold justify-center"
             imageClassName="rounded-2xl"
+            animDelay={0.3}
           />
+
+          <h4 className="inline-flex flex-wrap text-balance relative text-left justify-start text-white text-lg/tight md:text-xl/tight xl:text-3xl/none 4xl:text-4xl/none font-sans-primary font-medium tracking-tight js-heading mt-2 lg:mt-4">
+            on every searchable platform
+          </h4>
+
+          <div className="flex gap-14 items-center mt-12">
+            {brands.map((brand, idx) => (
+              <Image
+                key={idx}
+                src={brand.src}
+                alt={`Brand ${idx + 1}`}
+                width={68}
+                height={32}
+                className="max-h-8 object-contain"
+                loading="lazy"
+              />
+            ))}
+          </div>
+
+          <div className="absolute bottom-0 left-0 w-full flex justify-between p-5">
+            <p className="text-sm leading-normal text-pretty lg:text-base text-white">
+              Organic media planners creating, distributing & optimising <br /> <b>search-first</b> content for SEO,
+              Social, PR, Ai and LLM search
+            </p>
+            <p className="text-sm leading-normal font-medium text-pretty lg:text-base text-white">
+              4 Global Offices serving <br /> UK, USA (New York) & EU
+            </p>
+          </div>
         </div>
       </div>
     </section>

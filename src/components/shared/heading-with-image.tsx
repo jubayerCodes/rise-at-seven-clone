@@ -35,6 +35,7 @@ export interface HeadingWithImageProps {
   textClassName?: string;
   imageClassName?: string;
   animDelay?: number;
+  imageAtEnd?: boolean;
 }
 
 export default function HeadingWithImage({
@@ -46,6 +47,7 @@ export default function HeadingWithImage({
   textClassName,
   imageClassName,
   animDelay = 0.1,
+  imageAtEnd = false,
 }: HeadingWithImageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const line1Ref = useRef<HTMLSpanElement>(null);
@@ -55,8 +57,10 @@ export default function HeadingWithImage({
   // Split the second line so the image is injected before the last word
   const line2Words = line2.trim().split(/\s+/);
   const insertImageAt = line2Words.length > 1 ? line2Words.length - 1 : 0;
-  const line2Before = line2Words.slice(0, insertImageAt).join(" ");
-  const line2After = line2Words.slice(insertImageAt).join(" ");
+  const line2Before = imageAtEnd
+    ? line2Words.join(" ")
+    : line2Words.slice(0, insertImageAt).join(" ");
+  const line2After = imageAtEnd ? "" : line2Words.slice(insertImageAt).join(" ");
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -139,11 +143,7 @@ export default function HeadingWithImage({
   );
 
   return (
-    <div
-      ref={containerRef}
-      className={cn("select-none", className)}
-      style={{ visibility: "hidden" }}
-    >
+    <div ref={containerRef} className={cn("select-none", className)} style={{ visibility: "hidden" }}>
       {/* ── Line 1 (optional) ───────────────────────── */}
       {line1 && (
         <div className={lineWrapperCls}>
@@ -174,11 +174,7 @@ export default function HeadingWithImage({
               alt={imageAlt}
               width={400}
               height={400}
-              className={cn(
-                "inline-block object-cover aspect-square",
-                "h-[1em] w-auto",
-                imageClassName,
-              )}
+              className={cn("inline-block object-cover aspect-square", "h-[1em] w-auto", imageClassName)}
             />
           </span>
           {/* Words after the image */}
