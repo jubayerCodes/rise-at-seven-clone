@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Button, buttonVariants } from "../ui/button";
 import gsap from "gsap";
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
@@ -13,6 +13,13 @@ interface FlipButtonProps extends ButtonPrimitive.Props, VariantProps<typeof but
 const FlipButton = ({ children, ...props }: FlipButtonProps) => {
   const topRef = useRef<HTMLSpanElement>(null);
   const bottomRef = useRef<HTMLSpanElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (btnRef.current === null) return;
+
+    console.log(btnRef.current);
+  }, []);
 
   const handleEnter = () => {
     gsap.to(topRef.current, {
@@ -43,7 +50,12 @@ const FlipButton = ({ children, ...props }: FlipButtonProps) => {
   };
 
   return (
-    <Button {...props} onMouseEnter={handleEnter} onMouseLeave={handleLeave} className="relative overflow-hidden">
+    <Button
+      {...props}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      className="relative overflow-hidden transition transition-rounded"
+    >
       <span className="relative block overflow-hidden">
         <span ref={topRef} className="flex items-center gap-1.5">
           {children}
