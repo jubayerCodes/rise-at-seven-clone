@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
 import { agency1, agency2, agency3, agency4, agency5, agency6, agency7, agency8 } from "@/assets/svg/home.svg";
 import HeadingWithImage from "../shared/heading-with-image";
-import bg from "@/assets/img/hero/hero-1.webp";
+import bg from "@/assets/img/b2087e0cd3f699d3efc76f809ec72a85a6ab378e-1080x1350.webp";
 import { ArrowUpRight } from "lucide-react";
 import FlipButton from "../shared/flip-button";
 

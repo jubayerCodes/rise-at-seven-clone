@@ -18,8 +18,6 @@ const FlipButton = ({ children, ...props }: FlipButtonProps) => {
 
   useEffect(() => {
     if (btnRef.current === null) return;
-
-    console.log(btnRef.current);
   }, []);
 
   const handleEnter = () => {

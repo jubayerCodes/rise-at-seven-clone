@@ -25,10 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("h-full", "antialiased", heebo.variable, "font-sans")}>
       <body className="min-h-full flex flex-col">
-        <SmoothScroll>
-          <PageLoader />
-          {children}
-        </SmoothScroll>
+        <PageLoader />
+        <SmoothScroll>{children}</SmoothScroll>
         <Cursor />
       </body>
     </html>

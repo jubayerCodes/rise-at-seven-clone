@@ -125,15 +125,11 @@ function FeaturedWorks() {
     const section = sectionRef.current;
     const headings = headingsContainer.current;
 
-    // How far the cards need to travel = total cards height - visible container height
     const totalScrollDistance = cards.scrollHeight - section.clientHeight + 28 * 4;
-
     const headingScrollDistance = headings.scrollHeight / 1.6;
 
-    ScrollTrigger.normalizeScroll(true);
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
+    gsap
+      .timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
@@ -142,44 +138,22 @@ function FeaturedWorks() {
           scrub: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onRefresh: (self) => self.animation?.invalidate(),
         },
-      });
-
-      tl.to(cards, {
-        y: () => -totalScrollDistance,
-        ease: "none",
-      });
-
-      tl.to(
-        headings,
-        {
-          y: () => -headingScrollDistance,
-          ease: "none",
-        },
-        "<",
-      );
-    });
-
-    const rafId = requestAnimationFrame(() => {
-      ScrollTrigger.refresh(true);
-    });
-
-    return () => {
-      ctx.revert();
-      cancelAnimationFrame(rafId);
-    };
+      })
+      .to(cards, { y: () => -totalScrollDistance, ease: "none" })
+      .to(headings, { y: () => -headingScrollDistance, ease: "none" }, "<");
   }, []);
 
   const handleMouseEnter = (idx: number) => {
     setActiveIndex(idx);
   };
+
   const handleMouseLeave = () => {
     setActiveIndex(null);
   };
 
   return (
-    <section className="pb-7">
+    <section className="pb-24">
       <div ref={sectionRef} className="p-7 h-screen overflow-hidden">
         <div className="bg-[#111212] w-full h-full rounded-3xl p-7 flex justify-between overflow-hidden">
           <div className="w-1/2 py-24 pl-3.5">
@@ -223,7 +197,6 @@ function FeaturedWorks() {
                     activeIndex === i && "scale-110",
                   )}
                 />
-
                 {work?.searchText?.length && (
                   <div
                     className={cn(
