@@ -73,7 +73,7 @@ const Discovery = () => {
       </div>
       <div className="my-24 flex justify-between">
         <div className="max-w-2xl">
-          <p className="inline-flex flex-wrap text-balance relative   text-left justify-start text-grey-900 text-lg/tight | lg:text-lg/tight | xl:text-2xl/none | 4xl:text-3xl/none font-sans-primary font-medium tracking-tight js-heading">
+          <p className="text-balance text-left text-grey-900 xl:text-2xl font-medium tracking-tight leading-[1em] mt-2">
             A global team of search-first content marketers engineering semantic relevancy & category signals for both
             the internet and people
           </p>

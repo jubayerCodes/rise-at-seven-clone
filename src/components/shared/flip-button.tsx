@@ -5,6 +5,7 @@ import { Button, buttonVariants } from "../ui/button";
 import gsap from "gsap";
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
 interface FlipButtonProps extends ButtonPrimitive.Props, VariantProps<typeof buttonVariants> {
   children: React.ReactNode;
@@ -54,7 +55,7 @@ const FlipButton = ({ children, ...props }: FlipButtonProps) => {
       {...props}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
-      className="relative overflow-hidden transition transition-rounded"
+      className={cn("relative overflow-hidden", props.className)}
     >
       <span className="relative block overflow-hidden">
         <span ref={topRef} className="flex items-center gap-1.5">

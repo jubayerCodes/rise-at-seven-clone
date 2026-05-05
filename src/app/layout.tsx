@@ -3,6 +3,8 @@ import { Heebo } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import PageLoader from "@/components/shared/page-loader";
+import SmoothScroll from "@/components/smooth-scroll";
+import Cursor from "@/components/shared/cursor";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -23,8 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("h-full", "antialiased", heebo.variable, "font-sans")}>
       <body className="min-h-full flex flex-col">
-        <PageLoader />
-        {children}
+        <SmoothScroll>
+          <PageLoader />
+          {children}
+        </SmoothScroll>
+        <Cursor />
       </body>
     </html>
   );

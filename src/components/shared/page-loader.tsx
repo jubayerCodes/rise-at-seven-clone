@@ -96,7 +96,7 @@ export default function PageLoader() {
           top: 0,
           left: 0,
           width: "100%",
-          height: "115%",
+          height: "115vh",
           backgroundColor: "#B2F6E3",
           clipPath: "url(#loader-clip)",
           willChange: "transform",

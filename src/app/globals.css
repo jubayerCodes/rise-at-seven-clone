@@ -126,3 +126,21 @@
     @apply font-sans;
   }
 }
+
+.cursor-target {
+  @apply cursor-none!;
+}
+
+.work-heading-overlay::before,
+.work-heading-overlay::after {
+  content: "";
+  @apply w-full h-24 absolute  left-0 z-50 from-[#111212] to-transparent;
+}
+
+.work-heading-overlay::before {
+  @apply top-0 bg-linear-to-b;
+}
+
+.work-heading-overlay::after {
+  @apply bottom-0 bg-linear-to-t;
+}

@@ -1,4 +1,5 @@
 import Discovery from "@/components/home/discovery";
+import FeaturedWorks from "@/components/home/featured-works";
 import Hero from "@/components/home/hero";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <Hero />
       <Discovery />
+      <FeaturedWorks />
     </>
   );
 }
