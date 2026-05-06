@@ -127,7 +127,7 @@
   }
 }
 
-.cursor-target {
+.cursor-target, .text-cursor {
   @apply cursor-none!;
 }
 

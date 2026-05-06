@@ -42,7 +42,7 @@ const Cursor = () => {
   });
 
   return (
-    <div className="cursor size-7 rounded-full fixed top-0 left-0 pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 hidden justify-center items-center">
+    <div className="cursor size-7 rounded-full fixed top-0 left-0 pointer-events-none z-500 -translate-x-1/2 -translate-y-1/2 hidden justify-center items-center">
       <ArrowUpRight className="text-black size-3" />
     </div>
   );

@@ -14,6 +14,7 @@ import serviceImg6 from "@/assets/img/services/Screenshot-2025-06-24-at-00.20.47
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { cn } from "@/lib/utils";
 
 interface IService {
   title: string;
@@ -63,7 +64,6 @@ const Services = () => {
             line2="Our Services"
             imageUrl={headingImg.src}
             imageAlt="hero image"
-            className="text-center"
             textClassName="text-[100px] font-semibold justify-center"
             imageClassName="rounded-2xl"
             animDelay={0.3}
@@ -74,8 +74,8 @@ const Services = () => {
           </FlipButton>
         </div>
         <div className="grid grid-cols-2 gap-x-2 mt-6">
-          {services.map((service, idx) => (
-            <ServiceCard key={idx} service={service} idx={idx} />
+          {services.map((service, idx, items) => (
+            <ServiceCard key={idx} service={service} idx={idx} items={items} />
           ))}
         </div>
       </div>
@@ -83,7 +83,7 @@ const Services = () => {
   );
 };
 
-function ServiceCard({ service, idx }: { service: IService; idx: number }) {
+function ServiceCard({ service, idx, items }: { service: IService; idx: number; items: IService[] }) {
   const iconRef = useRef(null);
 
   useEffect(() => {
@@ -118,10 +118,10 @@ function ServiceCard({ service, idx }: { service: IService; idx: number }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       key={idx}
-      className={"w-full rounded-full relative overflow-hidden group"}
+      className="w-full rounded-full relative group overflow-hidden"
     >
-      <div className="border-b border-gray-400/70 px-12 py-4 flex items-center">
-        <div className="after:absolute after:inset-0 after:bg-black/50 pointer-events-none transition-opacity duration-300 opacity-0 hover:opacity-100"></div>
+      <div className={cn("border-gray-400/70 px-12 py-4 flex items-center", idx < items.length - 2 && "border-b")}>
+        <div className="after:absolute after:inset-0 after:bg-black/50 pointer-events-none transition-opacity duration-300 opacity-0 hover:opacity-100" />
         <Image
           src={service.img}
           width={600}

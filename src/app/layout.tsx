@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import PageLoader from "@/components/shared/page-loader";
 import SmoothScroll from "@/components/smooth-scroll";
 import Cursor from "@/components/shared/cursor";
+import TextCursor from "@/components/shared/text-cursor";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <PageLoader />
         <SmoothScroll>{children}</SmoothScroll>
         <Cursor />
+        <TextCursor />
       </body>
     </html>
   );
