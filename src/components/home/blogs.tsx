@@ -6,8 +6,11 @@ import HeadingWithImage from "../shared/heading-with-image";
 import headingImg from "@/assets/img/blogs/FOS25-3380.webp";
 
 import blogImg1 from "@/assets/img/blogs/0B5A7827.webp";
+import blogImg2 from "@/assets/img/blogs/3-copy.webp";
+import blogImg3 from "@/assets/img/blogs/Noomz1-4.webp";
 
 import authorImg1 from "@/assets/img/blogs/84b3917f166d7feb4c2376f78ce33ae432656999.webp";
+import authorImg2 from "@/assets/img/blogs/WhatsApp-Image-2025-06-23-at-22.50.52.webp";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
@@ -35,17 +38,18 @@ function Blogs() {
       url: "#",
     },
     {
-      title: "Ryan McNamara Is Now Rise at Seven's Global Operations Director",
-      img: blogImg1.src,
-      author: "Carrie Rose",
-      authorImg: authorImg1.src,
+      title:
+        "Rise at Seven Appointed by Coneys to Drive Demand and Retail Growth for them in the Chocolate Confectionery Category",
+      img: blogImg2.src,
+      author: "Ray Saddiq",
+      authorImg: authorImg2.src,
       category: "News",
       time: "2 mins",
       url: "#",
     },
     {
-      title: "Ryan McNamara Is Now Rise at Seven's Global Operations Director",
-      img: blogImg1.src,
+      title: "Rise at Seven Appointed by Langtins to drive demand and retail growth for Noomz",
+      img: blogImg3.src,
       author: "Carrie Rose",
       authorImg: authorImg1.src,
       category: "News",
@@ -55,7 +59,7 @@ function Blogs() {
   ];
 
   return (
-    <section className="p-7">
+    <section className="p-7 pb-24">
       <div>
         <div className="flex justify-between items-center border-b border-gray-400/70 pb-5">
           <HeadingWithImage
@@ -97,11 +101,6 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
       duration: 0.3,
       ease: "cubic-bezier(0.4, 0, 0.2, 1)",
     });
-
-    gsap.to(imgRef.current, {
-      scale: 1.2,
-      duration: 0.3,
-    });
   };
 
   const handleMouseLeave = () => {
@@ -109,11 +108,6 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
       clipPath: "circle(0% at 50% 100%)",
       duration: 0.3,
       ease: "cubic-bezier(0.4, 0, 0.2, 1)",
-    });
-
-    gsap.to(imgRef.current, {
-      scale: 1,
-      duration: 0.3,
     });
   };
 
@@ -128,7 +122,7 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
 
         <div
           className={cn(
-            "absolute top-5 left-5 rounded-full px-4 py-1.5 flex justify-center items-center gap-2 text-white font-semibold backdrop-blur-sm bg-white/20 text-base transition duration-300 z-100000",
+            "absolute top-5 left-5 rounded-full px-4 py-1.5 flex justify-center items-center gap-2 text-white font-semibold backdrop-blur-sm bg-white/20 text-base transition duration-300 z-20",
           )}
         >
           {blog?.category}
@@ -140,9 +134,19 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
           className="absolute inset-0 pointer-events-none z-10"
           style={{
             clipPath: "circle(0% at 50% 100%)",
-            backdropFilter: "blur(13px)",
+            filter: "blur(13px)",
           }}
-        ></div>
+        >
+          <div className="w-full h-full">
+            <Image
+              src={blog.img}
+              width={600}
+              height={600}
+              alt={blog.title}
+              className="w-full h-full object-cover scale-120"
+            />
+          </div>
+        </div>
       </div>
       <div className="pt-6">
         <div className="flex justify-start gap-2">

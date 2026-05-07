@@ -4,6 +4,7 @@ import Discovery from "@/components/home/discovery";
 import FeaturedWorks from "@/components/home/featured-works";
 import Hero from "@/components/home/hero";
 import Legacy from "@/components/home/legacy";
+import ReadyToRise from "@/components/home/ready-to-rise";
 import Services from "@/components/home/services";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <Brief />
       <Legacy />
       <Blogs />
+      <ReadyToRise />
     </>
   );
 }

@@ -13,7 +13,7 @@ function SmoothScroll({ children }: { children: React.ReactNode }) {
       smooth: 0.8,
       effects: true,
       smoothTouch: 0.8,
-      speed: 1,
+      speed: 0.8,
     });
   }, []);
 
