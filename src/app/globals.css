@@ -127,7 +127,8 @@
   }
 }
 
-.cursor-target, .text-cursor {
+.cursor-target,
+.text-cursor {
   @apply cursor-none!;
 }
 
@@ -143,4 +144,28 @@
 
 .work-heading-overlay::after {
   @apply bottom-0 bg-linear-to-t;
+}
+
+.underlined-link {
+  position: relative;
+}
+
+.underlined-link::before {
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0;
+  transition-property: all;
+  transition-duration: 1s;
+  content: "";
+  background-color: #ffffff;
+  transition-duration: 0.3s;
+  position: absolute;
+}
+
+.underlined-link:hover:before {
+  right: auto;
+  left: 0;
+  width: 100%;
+  content: "";
 }

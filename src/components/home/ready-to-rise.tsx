@@ -412,20 +412,17 @@ function ReadyToRise() {
   }, []);
 
   return (
-    <>
-      <section ref={sectionRef} className="h-screen w-full relative overflow-visible">
-        <h2
-          ref={headingRef}
-          className="absolute left-full top-1/2 -translate-y-1/2 text-[306px] font-medium leading-none text-nowrap flex items-baseline tracking-tighter"
-        >
-          {headingText.split("").map((letter, key) => (
-            // no overflow-hidden — let the wave motion show fully
-            <div key={key}>{letter === " " ? "\u00A0" : letter}</div>
-          ))}
-        </h2>
-      </section>
-      <div className="h-[400vh] bg-amber-800" />
-    </>
+    <section ref={sectionRef} className="h-screen w-full relative overflow-visible">
+      <h2
+        ref={headingRef}
+        className="absolute left-full top-1/2 -translate-y-1/2 text-[306px] font-medium leading-none text-nowrap flex items-baseline tracking-tighter"
+      >
+        {headingText.split("").map((letter, key) => (
+          // no overflow-hidden — let the wave motion show fully
+          <div key={key}>{letter === " " ? "\u00A0" : letter}</div>
+        ))}
+      </h2>
+    </section>
   );
 }
 
