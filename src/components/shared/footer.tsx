@@ -18,17 +18,10 @@ function Footer() {
   const footerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  // refs for animated elements
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const inputRef = useRef<HTMLDivElement>(null);
-  const socialRef = useRef<HTMLDivElement>(null);
-  const navColRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const footer = footerRef.current;
     const overlay = overlayRef.current;
+
     if (!footer || !overlay) return;
 
     const ctx = gsap.context(() => {
@@ -100,9 +93,10 @@ function Footer() {
   ];
 
   return (
-    <footer className="relative p-2">
+    <footer className="relative p-2 overflow-hidden">
       {/* ── Outer wrapper: relative so the overlay can be absolutely positioned ── */}
-      <div ref={footerRef} className="relative bg-foreground rounded-3xl overflow-hidden ">
+      <div ref={footerRef} className="relative bg-foreground rounded-3xl overflow-hidden">
+
         {/* ── Black overlay — starts fully opaque, fades to 0 on scroll ── */}
         <div
           ref={overlayRef}
@@ -115,18 +109,18 @@ function Footer() {
           <div className="grid grid-cols-12">
             {/* Left: headline + email + socials */}
             <div className="col-span-4 flex flex-col gap-5 justify-start w-full">
-              <h2 ref={headlineRef} className="text-white text-3xl font-medium">
+              <h2 className="text-white text-3xl font-medium">
                 Stay updated with Rise news
               </h2>
 
-              <div ref={inputRef}>
+              <div >
                 <Input
                   className="bg-[#282828] border-none transition rounded-full w-full text-white font-medium tracking-tight leading-none text-lg px-5 py-4 lg:text-xl lg:px-6 lg:py-5 placeholder:text-white/50 focus:outline-none focus:ring-3 focus:ring-white/15 h-auto!"
                   placeholder="Your Email Address"
                 />
               </div>
 
-              <div ref={socialRef} className="flex gap-1">
+              <div className="flex gap-1">
                 {socialLinks.map((item, idx) => (
                   <Link key={idx} href={item.url}>
                     <Button className="py-1 px-2 h-fit! gap-1 hover:rounded-md! text-xs!">
@@ -142,9 +136,6 @@ function Footer() {
               {footerMenus.map((menu, idx) => (
                 <div
                   key={idx}
-                  ref={(el) => {
-                    navColRefs.current[idx] = el;
-                  }}
                   className="border-l border-white/20 flex flex-col gap-1.5 pl-3 pt-1"
                 >
                   {menu.items.map((item, itemIdx) => (
@@ -160,12 +151,12 @@ function Footer() {
           </div>
 
           {/* Logo */}
-          <div ref={logoRef} className="mt-32">
+          <div className="mt-32">
             <FooterLogo className="text-white!" />
           </div>
 
           {/* Bottom bar */}
-          <div ref={bottomRef} className="flex justify-between items-center text-xs text-white mt-8">
+          <div className="flex justify-between items-center text-xs text-white mt-8">
             <div className="flex justify-start items-center gap-0.5 font-light">
               {footerBottomItems.map((item, idx, arr) => (
                 <Fragment key={idx}>

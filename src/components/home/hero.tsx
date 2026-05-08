@@ -21,6 +21,8 @@ import brand6 from "@/assets/img/brands/pinterest.webp";
 import brand7 from "@/assets/img/brands/giphy.webp";
 import brand8 from "@/assets/img/brands/reddit.webp";
 import brand9 from "@/assets/img/brands/amazon.webp";
+import Link from "next/link";
+import FlipButton from "../shared/flip-button";
 
 const Hero = () => {
   const heroBgs = [hero1, hero2, hero3];
@@ -34,6 +36,13 @@ const Hero = () => {
 
   return (
     <section className="px-2 pt-2">
+      <div className="bg-[#B2F6E3] flex rounded-full hover:rounded-md justify-center py-1 mb-2 w-full">
+        <Link href={"#"} className="w-full">
+          <FlipButton className={"p-0 h-fit bg-transparent text-sm tracking-tighter font-semibold text-center w-full"}>
+            🚨 The Category Leaderboard - Live Now
+          </FlipButton>
+        </Link>
+      </div>
       <div
         className="rounded-2xl bg-no-repeat bg-cover bg-center overflow-hidden"
         style={{

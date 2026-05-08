@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  allowedDevOrigins: ["matt-undaubed-extensively.ngrok-free.dev"],
 };
 
 export default nextConfig;

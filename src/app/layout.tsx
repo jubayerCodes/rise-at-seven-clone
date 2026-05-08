@@ -7,6 +7,7 @@ import SmoothScroll from "@/components/smooth-scroll";
 import Cursor from "@/components/shared/cursor";
 import TextCursor from "@/components/shared/text-cursor";
 import Footer from "@/components/shared/footer";
+import Header from "@/components/shared/header";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -28,8 +29,10 @@ export default function RootLayout({
     <html lang="en" className={cn("h-full", "antialiased", heebo.variable, "font-sans")}>
       <body className="min-h-full flex flex-col">
         <PageLoader />
-        <SmoothScroll>{children}
-                  <Footer />
+        <Header />
+        <SmoothScroll>
+          {children}
+          <Footer />
         </SmoothScroll>
         <Cursor />
         <TextCursor />
