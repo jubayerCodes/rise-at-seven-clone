@@ -15,6 +15,9 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import Link from "next/link";
 
 interface IBlog {
   title: string;
@@ -59,27 +62,50 @@ function Blogs() {
   ];
 
   return (
-    <section className="p-7 pb-24">
+    <section className="p-4 pb-18 xl:p-7 xl:pb-40">
       <div>
-        <div className="flex justify-between items-center border-b border-gray-400/70 pb-5">
+        <div className="flex justify-between items-center xl:border-b border-gray-400/70 xl:pb-5">
           <HeadingWithImage
             line2="What's New"
             imageUrl={headingImg.src}
             imageAlt="blog heading image"
-            textClassName="text-[100px] font-semibold justify-center"
+            textClassName="text-[60px] xl:text-[100px] font-semibold xl:justify-center"
             imageClassName="rounded-2xl"
             animDelay={0.3}
           />
 
-          <FlipButton>
+          <FlipButton className={"hidden xl:inline-flex"}>
             Explore More Thoughts <ArrowUpRight />
           </FlipButton>
         </div>
-        <div className="grid grid-cols-3 gap-5 mt-10">
+        <div className="hidden xl:grid grid-cols-3 gap-5 mt-10">
           {blogs.map((blog, idx) => (
             <BlogCard key={idx} blog={blog} />
           ))}
         </div>
+
+        <div className="mt-4 xl:hidden block">
+          <Swiper
+            pagination={{
+              type: "progressbar",
+            }}
+            loop
+            spaceBetween={20}
+            navigation={true}
+            modules={[Pagination]}
+            className="mySwiper progress-swiper"
+          >
+            {blogs.map((blog, idx) => (
+              <SwiperSlide key={idx}>
+                <BlogCard key={idx} blog={blog} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        <FlipButton className={"xl:hidden mt-4 w-full"}>
+          Explore More Thoughts <ArrowUpRight />
+        </FlipButton>
       </div>
     </section>
   );
@@ -112,13 +138,21 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
   };
 
   return (
-    <div
+    <Link
+      href={blog.url}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className="cursor-target hover:-translate-y-2 transition duration-300"
     >
       <div className="relative overflow-hidden rounded-2xl">
-        <Image ref={imgRef} src={blog.img} width={600} height={600} alt={blog.title} className="w-full h-[600px]" />
+        <Image
+          ref={imgRef}
+          src={blog.img}
+          width={600}
+          height={600}
+          alt={blog.title}
+          className="w-full h-[300px] xl:h-[600px] object-cover"
+        />
 
         <div
           className={cn(
@@ -131,7 +165,7 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
         {/* Blur Overlay */}
         <div
           ref={overlayRef}
-          className="absolute inset-0 pointer-events-none z-10"
+          className="absolute inset-0 pointer-events-none z-10 hidden xl:block"
           style={{
             clipPath: "circle(0% at 50% 100%)",
             filter: "blur(13px)",
@@ -169,6 +203,6 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
         </div>
         <h3 className="text-balance relative xl:text-3xl font-medium tracking-tight leading-none mt-3">{blog.title}</h3>
       </div>
-    </div>
+    </Link>
   );
 };

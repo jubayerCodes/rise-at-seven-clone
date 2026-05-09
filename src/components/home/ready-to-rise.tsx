@@ -412,7 +412,7 @@ function ReadyToRise() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="h-screen w-full relative overflow-visible">
+    <section ref={sectionRef} className="hidden xl:block h-screen w-full relative overflow-visible">
       <h2
         ref={headingRef}
         className="absolute left-full top-1/2 -translate-y-1/2 text-[306px] font-medium leading-none text-nowrap flex items-baseline tracking-tighter"

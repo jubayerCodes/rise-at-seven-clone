@@ -8,7 +8,7 @@ import { useCursorStore } from "@/store/cursor-store";
 function Brief() {
   const setText = useCursorStore((s) => s.setText);
   return (
-    <section className="pt-8 xl:pt-24">
+    <section className="pt-8 xl:pt-24 xl:pb-10">
       <div
         className="text-cursor hidden xl:block"
         onMouseEnter={() => setText("Send Us Your Brief")}

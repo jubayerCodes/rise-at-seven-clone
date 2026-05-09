@@ -274,7 +274,7 @@ function FeaturedWorks() {
         </div>
       </div>
       <div className="flex justify-stretch xl:justify-center w-full px-4">
-        <FlipButton className={"w-full"}>
+        <FlipButton className={"w-full xl:w-fit"}>
           Explore Our Work <ArrowUpRight />
         </FlipButton>
       </div>

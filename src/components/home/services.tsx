@@ -15,6 +15,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface IService {
   title: string;
@@ -69,7 +70,7 @@ const Services = () => {
             animDelay={0.3}
           />
 
-          <FlipButton className={"hidden xl:block"}>
+          <FlipButton className={"hidden xl:inline-block"}>
             View All Services <ArrowUpRight />
           </FlipButton>
         </div>
@@ -78,7 +79,7 @@ const Services = () => {
             <ServiceCard key={idx} service={service} idx={idx} items={items} />
           ))}
         </div>
-        <FlipButton className={"xl:hidden block w-full justify-center mt-3"}>
+        <FlipButton className={"xl:hidden inline-block w-full justify-center mt-3"}>
           View All Services <ArrowUpRight />
         </FlipButton>
       </div>
@@ -118,14 +119,15 @@ function ServiceCard({ service, idx, items }: { service: IService; idx: number; 
 
   return (
     <>
-      <div
+      <Link
+        href={service.url}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         key={idx}
-        className="w-full rounded-full relative group overflow-hidden hidden xl:block"
+        className="w-full rounded-full relative group overflow-hidden hidden xl:block cursor-pointer"
       >
         <div className={cn("border-gray-400/70 px-12 py-4 flex items-center", idx < items.length - 2 && "border-b")}>
-          <div className="after:absolute after:inset-0 after:bg-black/50 pointer-events-none transition-opacity duration-300 opacity-0 hover:opacity-100" />
+          <div className="after:content-[] after:absolute after:inset-0 after:bg-black/50 pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10" />
           <Image
             src={service.img}
             width={600}
@@ -137,12 +139,12 @@ function ServiceCard({ service, idx, items }: { service: IService; idx: number; 
             ref={iconRef}
             className="size-0 -translate-x-5 translate-y-5 -rotate-90 text-white relative z-20"
           />
-          <h3 className="relative text-[60px] text-foreground group-hover:text-white z-20! transition-colors duration-300">
+          <h3 className="relative text-[60px] text-foreground group-hover:text-white z-20! transition-colors duration-300 font-semibold">
             {service.title}
           </h3>
         </div>
-      </div>
-      <div key={idx + "mobile"} className="w-full relative block xl:hidden">
+      </Link>
+      <Link href={service.url} key={idx + "mobile"} className="w-full relative block xl:hidden">
         <div className={cn("border-b border-gray-400/70 py-3 flex items-center justify-start gap-3")}>
           <Image
             src={service.img}
@@ -153,7 +155,7 @@ function ServiceCard({ service, idx, items }: { service: IService; idx: number; 
           />
           <h3 className="text-3xl text-foreground font-semibold">{service.title}</h3>
         </div>
-      </div>
+      </Link>
     </>
   );
 }

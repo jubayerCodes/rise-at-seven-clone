@@ -12,7 +12,7 @@ const Discovery = () => {
   const blurWidth = 1;
 
   return (
-    <section className="px-4 xl:px-7 pt-6">
+    <section className="px-4 xl:px-7 pt-6 xl:pt-16">
       <div className="w-full flex flex-col xl:flex-row gap-1 xl:gap-10 items-center">
         <div className="w-full xl:w-1/10">
           <h4 className="inline-flex flex-wrap text-balance relative text-left justify-start text-grey-900 text-sm/tight font-sans-primary font-medium tracking-tight js-heading sm:max-w-32">
@@ -87,7 +87,7 @@ const Discovery = () => {
             </FlipButton>
           </div>
         </div>
-        <div className="xl:w-3xl">
+        <div className="xl:w-[840px]">
           <HeadingWithImage
             line1="Driving Demand &"
             line2="Discovery"
