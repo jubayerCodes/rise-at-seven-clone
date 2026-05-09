@@ -93,7 +93,7 @@ const Discovery = () => {
             line2="Discovery"
             imageUrl={bg.src}
             imageAlt="hero image"
-            textClassName="text-[52px] xl:text-[90px] font-medium text-start"
+            textClassName="text-[46px] xl:text-[90px] font-medium text-start"
             imageClassName="rounded-md xl:rounded-2xl"
             animDelay={0.3}
             imageAtEnd

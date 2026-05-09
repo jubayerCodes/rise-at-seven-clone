@@ -9,11 +9,13 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function SmoothScroll({ children }: { children: React.ReactNode }) {
   useGSAP(() => {
+    const mobileDevice = window.innerWidth <= 1024;
+
     ScrollSmoother.create({
-      smooth: 0.8,
+      smooth: mobileDevice ? 0.1 : 0.8,
       effects: true,
-      smoothTouch: 0.8,
-      speed: 0.8,
+      smoothTouch: mobileDevice ? 0.001 : 0.8,
+      speed: mobileDevice ? 1 : 0.8,
     });
   }, []);
 
