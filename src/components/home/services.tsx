@@ -153,7 +153,7 @@ function ServiceCard({ service, idx, items }: { service: IService; idx: number; 
             alt={service.title}
             className="object-cover aspect-square rounded-md"
           />
-          <h3 className="text-3xl text-foreground font-semibold">{service.title}</h3>
+          <h3 className="text-3xl text-foreground font-semibold tracking-tight">{service.title}</h3>
         </div>
       </Link>
     </>

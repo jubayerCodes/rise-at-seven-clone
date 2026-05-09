@@ -144,7 +144,7 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
       onMouseLeave={handleMouseLeave}
       className="cursor-target hover:-translate-y-2 transition duration-300"
     >
-      <div className="relative overflow-hidden rounded-2xl">
+      <div className="relative overflow-hidden rounded-xl xl:rounded-2xl">
         <Image
           ref={imgRef}
           src={blog.img}
@@ -156,7 +156,7 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
 
         <div
           className={cn(
-            "absolute top-5 left-5 rounded-full px-4 py-1.5 flex justify-center items-center gap-2 text-white font-semibold backdrop-blur-sm bg-white/20 text-base transition duration-300 z-20",
+            "absolute xl:top-5 xl:left-5 top-3 left-3 rounded-full xl:px-4 xl:py-1.5 px-3 py-1 flex justify-center items-center gap-2 text-white xl:font-semibold backdrop-blur-sm bg-white/20 text-sm xl:text-base transition duration-300 z-20",
           )}
         >
           {blog?.category}
@@ -186,18 +186,24 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
         <div className="flex justify-start gap-2">
           <div
             className={cn(
-              "rounded-full px-3 py-1.5 flex justify-start items-center gap-1 bg-white text-base font-medium text-[#6a6a6a] tracking-tight",
+              "rounded-full xl:px-3 xl:py-1.5 px-2 py-1 flex justify-start items-center gap-2 bg-white text-sm xl:text-base font-medium text-[#6a6a6a] tracking-tight",
             )}
           >
-            <Image src={blog.authorImg} width={18} height={18} alt={blog.author} className="rounded-full" />
+            <Image
+              src={blog.authorImg}
+              width={18}
+              height={18}
+              alt={blog.author}
+              className="rounded-full size-4 xl:size-[18px]"
+            />
             {blog?.author}
           </div>
           <div
             className={cn(
-              "rounded-full px-3 py-1.5 flex justify-start items-center gap-2 bg-white text-base font-medium text-[#6a6a6a] tracking-tight",
+              "rounded-full xl:px-3 xl:py-1.5 px-2 py-1 flex justify-start items-center gap-2 bg-white text-sm xl:text-base font-medium text-[#6a6a6a] tracking-tight",
             )}
           >
-            <Clock className="size-4.5" />
+            <Clock className="size-4 xl:size-4.5" />
             {blog?.time}
           </div>
         </div>

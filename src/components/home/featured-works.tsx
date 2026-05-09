@@ -241,7 +241,7 @@ function FeaturedWorks() {
                 </Link>
                 <Link
                   href={"#"}
-                  className={cn("h-[300px] rounded-3xl cursor-target overflow-hidden relative xl:hidden block")}
+                  className={cn("h-[250px] rounded-3xl cursor-target overflow-hidden relative xl:hidden block")}
                   onMouseEnter={() => handleMouseEnter(i)}
                   onMouseLeave={handleMouseLeave}
                 >
@@ -249,9 +249,9 @@ function FeaturedWorks() {
                   <Image
                     src={work?.img}
                     height={550}
-                    width={300}
+                    width={250}
                     alt={work?.title}
-                    className={cn("h-[300px] w-full object-cover transition duration-300")}
+                    className={cn("h-[250px] w-full object-cover transition duration-300")}
                   />
                   {work?.searchText?.length && (
                     <div

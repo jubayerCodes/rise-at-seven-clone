@@ -105,7 +105,7 @@ function Footer() {
 
         {/* ── Footer content ── */}
         <div className="py-10 px-4 xl:px-7 rounded-3xl relative z-10">
-          <div className="grid xl:grid-cols-12 gap-y-14">
+          <div className="grid xl:grid-cols-12 gap-y-10">
             <div className="xl:col-span-4 flex flex-col gap-3 xl:gap-5 justify-start w-full">
               <h2 className="text-white text-xl xl:text-3xl font-medium">Stay updated with Rise news</h2>
 
@@ -153,7 +153,7 @@ function Footer() {
           </div>
 
           {/* Logo */}
-          <div className="mt-15 xl:mt-32">
+          <div className="mt-12 xl:mt-32">
             <FooterLogo className="text-white!" />
           </div>
 

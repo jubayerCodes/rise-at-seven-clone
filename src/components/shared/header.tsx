@@ -307,7 +307,7 @@ function Header() {
       <div className="xl:p-3 xl:pr-7">
         <div
           className={cn(
-            "px-5 xl:pr-2 py-5 xl:py-2 overflow-hidden xl:rounded-full w-full flex justify-between items-center transition duration-100",
+            "px-6 xl:px-5 xl:pr-2 py-5 xl:py-2 overflow-hidden xl:rounded-full w-full flex justify-between items-center transition duration-100",
             secondaryHeader && "bg-white/60 backdrop-blur-lg",
           )}
         >

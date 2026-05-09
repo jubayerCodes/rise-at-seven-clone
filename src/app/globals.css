@@ -189,4 +189,5 @@
 .progress-swiper .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
   background: #000000;
   border-radius: 9999px;
+  transition-duration: 0.7s !important;
 }
