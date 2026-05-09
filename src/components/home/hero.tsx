@@ -38,7 +38,7 @@ const Hero = () => {
     <section className="px-2 pt-2">
       <div className="bg-[#B2F6E3] flex rounded-full hover:rounded-md justify-center py-1 mb-2 w-full">
         <Link href={"#"} className="w-full">
-          <FlipButton className={"p-0 h-fit bg-transparent text-sm tracking-tighter font-semibold text-center w-full"}>
+          <FlipButton className={"p-0 h-fit bg-transparent text-xs xl:text-sm tracking-tighter font-semibold text-center w-full"}>
             🚨 The Category Leaderboard - Live Now
           </FlipButton>
         </Link>
@@ -47,7 +47,7 @@ const Hero = () => {
         className="rounded-2xl bg-no-repeat bg-cover bg-center overflow-hidden"
         style={{
           backgroundImage: `url("${heroBg.src}")`,
-          height: "calc(100dvh - 0.5rem)",
+          height: "calc(100dvh - 1rem)",
         }}
       >
         <div className="size-full backdrop-blur-md backdrop-brightness-75 flex flex-col justify-center items-center px-4 text-center relative">
@@ -57,7 +57,7 @@ const Hero = () => {
           <div className="flex gap-2 items-center mb-4">
             <LeafStart className="mr-1" />
             {awards.map((award, idx) => (
-              <div key={idx} className="w-12 flex items-center">
+              <div key={idx} className="w-10 xl:w-12 flex items-center">
                 <Image
                   src={award.src}
                   alt={`Award ${idx + 1}`}
@@ -77,8 +77,8 @@ const Hero = () => {
             imageUrl={heroBg.src}
             imageAlt="hero image"
             className="text-center"
-            textClassName="text-white text-[120px] font-semibold justify-center"
-            imageClassName="rounded-2xl"
+            textClassName="text-white text-6xl xl:text-[120px] font-semibold justify-center"
+            imageClassName="rounded-xl xl:rounded-2xl"
             animDelay={0.3}
           />
 
@@ -86,7 +86,7 @@ const Hero = () => {
             on every searchable platform
           </h4>
 
-          <div className="flex gap-14 items-center mt-12">
+          <div className="hidden xl:flex gap-14 items-center mt-12">
             {brands.map((brand, idx) => (
               <Image
                 key={idx}
@@ -100,8 +100,8 @@ const Hero = () => {
             ))}
           </div>
 
-          <div className="absolute bottom-0 left-0 w-full flex justify-between p-5">
-            <p className="text-sm leading-normal text-pretty lg:text-base text-white">
+          <div className="absolute bottom-0 left-0 w-full flex justify-center xl:justify-between p-5">
+            <p className="hidden xl:block text-sm leading-normal text-pretty lg:text-base text-white">
               Organic media planners creating, distributing & optimising <br /> <b>search-first</b> content for SEO,
               Social, PR, Ai and LLM search
             </p>

@@ -56,7 +56,7 @@ const FlipButton = ({ children, ...props }: FlipButtonProps) => {
       className={cn("relative overflow-hidden", props.className)}
     >
       <span className="relative block overflow-hidden">
-        <span ref={topRef} className="flex items-center gap-1.5">
+        <span ref={topRef} className="flex justify-center items-center gap-1.5">
           {children}
         </span>
 

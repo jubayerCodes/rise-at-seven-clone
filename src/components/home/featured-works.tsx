@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import workImg1 from "@/assets/img/works/sixt-1.webp";
 import workImg2 from "@/assets/img/works/dojo-go-product-shot-1.webp";
 import workImg3 from "@/assets/img/works/Screenshot-2026-02-07-at-17.01.43.webp";
@@ -125,7 +125,9 @@ function FeaturedWorks() {
     const section = sectionRef.current;
     const headings = headingsContainer.current;
 
-    const totalScrollDistance = cards.scrollHeight - section.clientHeight + 28 * 4;
+    const padding = parseFloat(getComputedStyle(sectionRef.current).paddingTop);
+
+    const totalScrollDistance = cards.scrollHeight - section.clientHeight + padding * 4;
     const headingScrollDistance = headings.scrollHeight / 1.6;
 
     gsap
@@ -153,10 +155,10 @@ function FeaturedWorks() {
   };
 
   return (
-    <section className="pb-24">
-      <div ref={sectionRef} className="p-7 h-screen overflow-hidden">
-        <div className="bg-[#111212] w-full h-full rounded-3xl p-7 flex justify-between overflow-hidden">
-          <div className="w-1/2 py-24 pl-3.5">
+    <section className="pb-5 xl:pb-24">
+      <div ref={sectionRef} className="p-4 xl:p-7 h-screen overflow-hidden">
+        <div className="bg-[#111212] w-full h-full rounded-3xl p-4 xl:p-7 flex justify-between overflow-hidden">
+          <div className="w-1/2 py-24 pl-3.5  hidden xl:block">
             <h2 className="text-white text-md/tight xl:text-xl/tight font-medium tracking-tight">Featured Work</h2>
             <div className="pt-24 h-full">
               <div className="overflow-y-hidden h-full work-heading-overlay relative">
@@ -177,69 +179,102 @@ function FeaturedWorks() {
           </div>
           <div
             ref={cardsContainer}
-            className="w-3xl flex flex-col gap-5 justify-start items-stretch h-fit will-change-transform"
+            className="w-3xl flex flex-col gap-4 xl:gap-5 justify-start items-stretch h-fit will-change-transform"
           >
+            <h2 className="text-white text-md/tight xl:text-xl/tight font-medium tracking-tight block xl:hidden mt-4">
+              Featured Work
+            </h2>
             {works.map((work, i) => (
-              <Link
-                href={"#"}
-                key={i}
-                className={cn("h-[550px] rounded-3xl cursor-target overflow-hidden relative")}
-                onMouseEnter={() => handleMouseEnter(i)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Image
-                  src={work?.img}
-                  height={550}
-                  width={600}
-                  alt={work?.title}
-                  className={cn(
-                    "h-[550px] w-full object-cover transition duration-300",
-                    activeIndex === i && "scale-110",
-                  )}
-                />
-                {work?.searchText?.length && (
-                  <div
-                    className={cn(
-                      "absolute bottom-5 right-5 rounded-full px-4 py-1.5 flex justify-center items-center gap-2 text-white backdrop-blur-sm bg-white/20 text-base transition duration-300",
-                    )}
-                  >
-                    <Search className="size-5" /> {work?.searchText} <ArrowUpRight className="size-5" />
-                  </div>
-                )}
-
-                <div
-                  className="absolute inset-0 pointer-events-none z-10"
-                  style={{
-                    clipPath: activeIndex === i ? "circle(150% at 50% 100%)" : "circle(0% at 50% 100%)",
-                    transition: "clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                    backgroundColor: work.bgColor,
-                  }}
+              <Fragment key={i}>
+                <Link
+                  href={"#"}
+                  className={cn("h-[550px] rounded-3xl cursor-target overflow-hidden relative hidden xl:block")}
+                  onMouseEnter={() => handleMouseEnter(i)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  <div
+                  <Image
+                    src={work?.img}
+                    height={550}
+                    width={600}
+                    alt={work?.title}
                     className={cn(
-                      "absolute inset-0 flex flex-col items-stretch justify-between text-center p-8 z-10 transition-all duration-300",
-                      activeIndex === i ? "opacity-100 scale-100" : "opacity-0",
+                      "h-[550px] w-full object-cover transition duration-300",
+                      activeIndex === i && "scale-110",
                     )}
+                  />
+                  {work?.searchText?.length && (
+                    <div
+                      className={cn(
+                        "absolute bottom-5 right-5 rounded-full px-4 py-1.5 flex justify-center items-center gap-2 text-white backdrop-blur-sm bg-white/20 text-base transition duration-300",
+                      )}
+                    >
+                      <Search className="size-5" /> {work?.searchText} <ArrowUpRight className="size-5" />
+                    </div>
+                  )}
+
+                  <div
+                    className="absolute inset-0 pointer-events-none z-10"
+                    style={{
+                      clipPath: activeIndex === i ? "circle(150% at 50% 100%)" : "circle(0% at 50% 100%)",
+                      transition: "clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                      backgroundColor: work.bgColor,
+                    }}
                   >
-                    <h3 className="text-6xl font-medium mb-3 leading-tight text-black text-start">{work.desc}</h3>
-                    {work?.searchText?.length && (
-                      <div
-                        className={cn(
-                          "absolute bottom-5 right-5 rounded-full px-4 py-1.5 flex justify-center items-center gap-2 text-black backdrop-blur-sm bg-white/20 text-base transition duration-300",
-                        )}
-                      >
-                        <Search className="size-5" /> {work?.searchText} <ArrowUpRight className="size-5" />
-                      </div>
-                    )}
+                    <div
+                      className={cn(
+                        "absolute inset-0 flex flex-col items-stretch justify-between text-center p-8 z-10 transition-all duration-300",
+                        activeIndex === i ? "opacity-100 scale-100" : "opacity-0",
+                      )}
+                    >
+                      <h3 className="text-6xl font-medium mb-3 leading-tight text-black text-start">{work.desc}</h3>
+                      {work?.searchText?.length && (
+                        <div
+                          className={cn(
+                            "absolute bottom-5 right-5 rounded-full px-4 py-1.5 flex justify-center items-center gap-2 text-black backdrop-blur-sm bg-white/20 text-base transition duration-300",
+                          )}
+                        >
+                          <Search className="size-5" /> {work?.searchText} <ArrowUpRight className="size-5" />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+                <Link
+                  href={"#"}
+                  className={cn("h-[300px] rounded-3xl cursor-target overflow-hidden relative xl:hidden block")}
+                  onMouseEnter={() => handleMouseEnter(i)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <div className="w-full h-3/4 absolute bottom-0 left-0 bg-linear-0 from-foreground/80"></div>
+                  <Image
+                    src={work?.img}
+                    height={550}
+                    width={300}
+                    alt={work?.title}
+                    className={cn("h-[300px] w-full object-cover transition duration-300")}
+                  />
+                  {work?.searchText?.length && (
+                    <div
+                      className={cn(
+                        "absolute top-2 right-2 rounded-full px-4 py-1.5 flex justify-center items-center gap-2 text-white backdrop-blur-sm bg-white/20 text-sm transition duration-300",
+                      )}
+                    >
+                      <Search className="size-4" /> {work?.searchText} <ArrowUpRight className="size-4" />
+                    </div>
+                  )}
+
+                  <h3 className="text-left text-white text-3xl font-medium tracking-tight cursor-pointer absolute bottom-2 left-3 flex flex-col">
+                    <span className="text-sm tracking-normal">[{work?.period}]</span>
+                    {work?.title}
+                  </h3>
+                </Link>
+              </Fragment>
             ))}
           </div>
         </div>
       </div>
-      <div className="flex justify-center w-full">
-        <FlipButton>
+      <div className="flex justify-stretch xl:justify-center w-full px-4">
+        <FlipButton className={"w-full"}>
           Explore Our Work <ArrowUpRight />
         </FlipButton>
       </div>

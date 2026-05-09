@@ -169,3 +169,24 @@
   width: 100%;
   content: "";
 }
+
+/* ── Legacy section mobile Swiper ────────────────────────────── */
+.progress-swiper {
+  padding-bottom: 1rem !important;
+}
+
+/* Progress bar track */
+.progress-swiper .swiper-pagination-progressbar {
+  height: 2px;
+  background: rgba(0, 0, 0, 0.12);
+  bottom: 0 !important;
+  top: auto !important;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* Progress bar fill */
+.progress-swiper .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background: #000000;
+  border-radius: 9999px;
+}

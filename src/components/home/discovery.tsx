@@ -12,15 +12,15 @@ const Discovery = () => {
   const blurWidth = 1;
 
   return (
-    <section className="px-7 pt-6">
-      <div className="w-full flex gap-10 items-center">
-        <div className="w-1/10">
+    <section className="px-4 xl:px-7 pt-6">
+      <div className="w-full flex flex-col xl:flex-row gap-1 xl:gap-10 items-center">
+        <div className="w-full xl:w-1/10">
           <h4 className="inline-flex flex-wrap text-balance relative text-left justify-start text-grey-900 text-sm/tight font-sans-primary font-medium tracking-tight js-heading sm:max-w-32">
             The agency behind ...
           </h4>
         </div>
-        <div className="w-9/10 relative py-5">
-          <div className="absolute w-60 top-0 -left-5 h-full z-10 flex">
+        <div className="w-full xl:w-9/10 relative py-5">
+          <div className="absolute w-20 xl:w-60 top-0 -left-5 h-full z-10 flex">
             {Array.from({ length: 5 }, (_, i) => i).map((range, idx) => (
               <div
                 style={{
@@ -40,7 +40,7 @@ const Discovery = () => {
               ></div>
             ))}
           </div>
-          <div className="absolute w-60 top-0 -right-5 h-full z-10 flex">
+          <div className="absolute w-20 xl:w-60 top-0 -right-5 h-full z-10 flex">
             {Array.from({ length: 5 }, (_, i) => i).map((range, idx) => (
               <div
                 style={{
@@ -61,7 +61,7 @@ const Discovery = () => {
             ))}
           </div>
           <Marquee loop={0}>
-            <div className="initial-child-container flex justify-center items-center gap-54 pr-54">
+            <div className="initial-child-container flex justify-center items-center gap-16 xl:gap-54 pr-16 xl:pr-54">
               {agencies.map((Agency, idx) => (
                 <div key={idx} className="child">
                   <Agency className="max-h-8!" />
@@ -71,26 +71,35 @@ const Discovery = () => {
           </Marquee>
         </div>
       </div>
-      <div className="my-24 flex justify-between">
-        <div className="max-w-2xl">
-          <p className="text-balance text-left text-grey-900 xl:text-2xl font-medium tracking-tight leading-[1em] mt-2">
+      <div className="mt-14 xl:my-24 flex flex-col-reverse xl:flex-row justify-between">
+        <div className="xl:max-w-2xl">
+          <p className="text-balance text-left text-grey-900 text-lg xl:text-2xl font-medium tracking-tight leading-[1.1em] xl:leading-[1em] mt-3 xl:mt-2">
             A global team of search-first content marketers engineering semantic relevancy & category signals for both
             the internet and people
           </p>
+
+          <div className="xl:hidden flex flex-col mt-4 gap-2">
+            <FlipButton>
+              Our Story <ArrowUpRight />
+            </FlipButton>
+            <FlipButton variant="secondary">
+              Our Services <ArrowUpRight />
+            </FlipButton>
+          </div>
         </div>
-        <div className="w-3xl">
+        <div className="xl:w-3xl">
           <HeadingWithImage
             line1="Driving Demand &"
             line2="Discovery"
             imageUrl={bg.src}
             imageAlt="hero image"
-            textClassName="text-[90px] font-medium text-start"
-            imageClassName="rounded-2xl"
+            textClassName="text-[52px] xl:text-[90px] font-medium text-start"
+            imageClassName="rounded-md xl:rounded-2xl"
             animDelay={0.3}
             imageAtEnd
           />
 
-          <div className="flex mt-4 gap-2">
+          <div className="hidden xl:flex mt-4 gap-2">
             <FlipButton>
               Our Story <ArrowUpRight />
             </FlipButton>

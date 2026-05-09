@@ -6,6 +6,12 @@ import cardImg1 from "@/assets/img/legacy/b2087e0cd3f699d3efc76f809ec72a85a6ab37
 import cardImg2 from "@/assets/img/legacy/d4df0d30-d590-4e94-9056-9491f4beacba.webp";
 import cardImg3 from "@/assets/img/legacy/Screenshot-2025-06-23-at-23.15.19.webp";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 function Legacy() {
   const cardsContainer = useRef<HTMLDivElement>(null);
@@ -98,38 +104,123 @@ function Legacy() {
   }, []);
 
   return (
-    <section ref={sectionContainer} className="py-16 h-[50vh] relative">
-      <div>
-        <h2 className="text-black text-xl font-semibold text-center">Legacy In The Making</h2>
-      </div>
+    <>
+      <section ref={sectionContainer} className="py-16 h-[50vh] relative hidden xl:block">
+        <div>
+          <h2 className="text-black text-xl font-semibold text-center">Legacy In The Making</h2>
+        </div>
 
-      <div ref={cardsContainer} className="absolute inset-0 mt-10 h-screen">
-        {cards.map((card, idx) => (
-          <div
-            key={idx}
-            style={{
-              backgroundColor: card.bg,
-              zIndex: 100 - idx,
-            }}
-            className="absolute rounded-2xl w-xl min-h-[600px] px-14 py-10"
-          >
+        <div ref={cardsContainer} className="absolute inset-0 mt-10 h-screen">
+          {cards.map((card, idx) => (
             <div
-              className={`flex flex-col items-center justify-center h-full px-8 text-center gap-4`}
+              key={idx}
               style={{
-                color: card.textColor || "black",
+                backgroundColor: card.bg,
+                zIndex: 100 - idx,
               }}
+              className="absolute rounded-2xl w-xl min-h-[600px] px-14 py-10"
             >
-              <Image src={card.image} alt="card image" width={200} height={200} className="rounded-2xl" />
+              <div
+                className={`flex flex-col items-center justify-center h-full px-8 text-center gap-4`}
+                style={{
+                  color: card.textColor || "black",
+                }}
+              >
+                <Image src={card.image} alt="card image" width={200} height={200} className="rounded-2xl" />
 
-              <h1 className="text-7xl font-semibold tracking-tight mt-2">{card.title}</h1>
+                <h1 className="text-7xl font-semibold tracking-tight mt-2">{card.title}</h1>
 
-              <p className="text-base">{card.description1}</p>
-              {card.description2 && <p className="text-base">{card.description2}</p>}
+                <p className="text-base">{card.description1}</p>
+                {card.description2 && <p className="text-base">{card.description2}</p>}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+
+      <section className="py-12 block xl:hidden">
+        <div>
+          <h2 className="text-black text-base font-semibold text-center">Legacy In The Making</h2>
+        </div>
+
+        {/* <div className="mt-10">
+          {cards.map((card, idx) => (
+            <div
+              key={idx}
+              style={{
+                backgroundColor: card.bg,
+                zIndex: 100 - idx,
+              }}
+              className="rounded-2xl px-6 py-6"
+            >
+              <div
+                className={`flex flex-col items-center justify-center h-full text-center gap-4`}
+                style={{
+                  color: card.textColor || "black",
+                }}
+              >
+                <Image
+                  src={card.image}
+                  alt="card image"
+                  width={500}
+                  height={500}
+                  className="rounded-2xl w-full h-auto"
+                />
+
+                <h1 className="text-3xl tracking-tight">{card.title}</h1>
+
+                <p className="text-sm">{card.description1}</p>
+                {card.description2 && <p className="text-sm">{card.description2}</p>}
+              </div>
+            </div>
+          ))}
+        </div> */}
+
+        <div className="px-4 mt-2">
+          <Swiper
+            pagination={{
+              type: "progressbar",
+            }}
+            loop
+            spaceBetween={20}
+            navigation={true}
+            modules={[Pagination]}
+            className="mySwiper progress-swiper"
+          >
+            {cards.map((card, idx) => (
+              <SwiperSlide key={idx}>
+                <div
+                  style={{
+                    backgroundColor: card.bg,
+                  }}
+                  className="rounded-2xl px-6 py-6 h-[580px]"
+                >
+                  <div
+                    className={`flex flex-col items-center justify-center h-full text-center gap-4`}
+                    style={{
+                      color: card.textColor || "black",
+                    }}
+                  >
+                    <Image
+                      src={card.image}
+                      alt="card image"
+                      width={500}
+                      height={500}
+                      className="rounded-2xl w-full h-auto"
+                    />
+
+                    <h1 className="text-3xl tracking-tight">{card.title}</h1>
+
+                    <p className="text-sm">{card.description1}</p>
+                    {card.description2 && <p className="text-sm">{card.description2}</p>}
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
+    </>
   );
 }
 

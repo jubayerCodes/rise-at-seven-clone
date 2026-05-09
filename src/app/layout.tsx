@@ -8,6 +8,7 @@ import Cursor from "@/components/shared/cursor";
 import TextCursor from "@/components/shared/text-cursor";
 import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
+import OffCanvas from "@/components/shared/modals/off-canvas-menu";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -34,6 +35,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </SmoothScroll>
+        <OffCanvas />
         <Cursor />
         <TextCursor />
       </body>

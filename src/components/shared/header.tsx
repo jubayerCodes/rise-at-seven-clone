@@ -24,8 +24,12 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { HiBars2 } from "react-icons/hi2";
+import { useOffCanvasHeaderStore } from "@/store/off-canvas-header-store";
 
-interface IHeaderMenu {
+export interface IHeaderMenu {
   title: string;
   slug: string;
   badge?: string;
@@ -40,7 +44,106 @@ interface IHeaderMenu {
   };
 }
 
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
 function Header() {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [secondaryHeader, setsecondaryHeader] = useState(false);
+  const { setOpen, setHeaderMenu } = useOffCanvasHeaderStore();
+
+  useGSAP(() => {
+    if (!headerRef.current || !window.document) return;
+
+    gsap.set(headerRef.current, {
+      top: 48,
+    });
+
+    const setHeaderAtTop = {
+      top: 0,
+      duration: 0.1,
+    };
+
+    const initialStage = {
+      top: 48,
+      duration: 0.1,
+    };
+
+    const secondaryHeaderPosition = {
+      top: -100,
+      duration: 0.1,
+    };
+
+    const firstScroll = 40;
+
+    /**
+     * Apply the correct header state for a given scroll position with no
+     * velocity context (page load / refresh / ScrollTrigger refresh).
+     */
+    const applyScrolledState = (scrolledY: number) => {
+      if (scrolledY >= 81) {
+        setsecondaryHeader(true);
+        gsap.to(headerRef.current, setHeaderAtTop);
+      } else if (scrolledY > firstScroll) {
+        setsecondaryHeader(false);
+        gsap.to(headerRef.current, setHeaderAtTop);
+      } else {
+        setsecondaryHeader(false);
+        gsap.to(headerRef.current, initialStage);
+      }
+    };
+
+    const st = ScrollTrigger.create({
+      start: 0,
+      end: "max",
+      invalidateOnRefresh: true,
+      // onRefresh fires after GSAP recalculates positions — by this point the
+      // browser has already restored the scroll position, so window.scrollY
+      // is the true value (unlike the value captured at init time).
+      onRefresh: (self) => {
+        applyScrolledState(self.scroll());
+      },
+      onUpdate: (self) => {
+        const scrolledY = self.scroll();
+        const velocity = self.getVelocity();
+
+        // Scrolling DOWN
+        if (velocity > 0) {
+          if (scrolledY <= firstScroll) {
+            setsecondaryHeader(false);
+            gsap.to(headerRef.current, initialStage);
+          } else if (scrolledY > firstScroll && scrolledY < 81) {
+            setsecondaryHeader(false);
+            gsap.to(headerRef.current, setHeaderAtTop);
+          } else if (scrolledY >= 81) {
+            setsecondaryHeader(true);
+            gsap.to(headerRef.current, secondaryHeaderPosition); // hide it
+          }
+        }
+
+        // velocity === 0 (stopped)
+        if (velocity === 0) {
+          applyScrolledState(scrolledY);
+        }
+
+        // Scrolling UP
+        if (velocity < 0) {
+          if (scrolledY <= firstScroll) {
+            setsecondaryHeader(false);
+            gsap.to(headerRef.current, initialStage);
+          } else if (scrolledY > firstScroll && scrolledY < 81) {
+            setsecondaryHeader(false);
+            gsap.to(headerRef.current, setHeaderAtTop);
+          } else if (scrolledY >= 81) {
+            setsecondaryHeader(true);
+            gsap.to(headerRef.current, setHeaderAtTop); // show it with secondary style
+          }
+        }
+      },
+    });
+
+    return () => st.kill();
+  }, []);
+
   const headerMenu: IHeaderMenu[] = [
     {
       title: "Services",
@@ -200,24 +303,45 @@ function Header() {
   ];
 
   return (
-    <header className="sticky top-12 h-fit z-10000 p-3">
-      <div className="px-6 pr-2 py-2 overflow-hidden rounded-full w-full flex justify-between items-center">
-        <div>
-          <FooterLogo className="w-[160px]! text-white" />
-        </div>
-        <div>
-          <NavigationMenu>
-            <NavigationMenuList>
-              {headerMenu.map((menu, idx) => (
-                <MenuItem key={idx} item={menu} />
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
-        <div>
-          <FlipButton>
-            Get In Touch <ArrowUpRight />
-          </FlipButton>
+    <header ref={headerRef} className="fixed h-fit z-999 left-0 right-0 w-screen">
+      <div className="xl:p-3 xl:pr-7">
+        <div
+          className={cn(
+            "px-6 xl:pr-2 py-5 xl:py-2 overflow-hidden xl:rounded-full w-full flex justify-between items-center transition duration-100",
+            secondaryHeader && "bg-white/60 backdrop-blur-lg",
+          )}
+        >
+          <div>
+            <FooterLogo
+              className={cn(
+                "w-32 xl:w-[160px]! transition duration-100",
+                secondaryHeader ? "text-foreground" : "text-white",
+              )}
+            />
+          </div>
+          <div className="hidden xl:block">
+            <NavigationMenu>
+              <NavigationMenuList>
+                {headerMenu.map((menu, idx) => (
+                  <MenuItem key={idx} item={menu} secondaryHeader={secondaryHeader} />
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+          <div className="hidden xl:block">
+            <FlipButton>
+              Get In Touch <ArrowUpRight />
+            </FlipButton>
+          </div>
+          <div className="block xl:hidden">
+            <HiBars2
+              onClick={() => {
+                setOpen(true);
+                setHeaderMenu(headerMenu);
+              }}
+              className={cn("text-3xl", secondaryHeader ? "text-foreground" : "text-white")}
+            />
+          </div>
         </div>
       </div>
     </header>
@@ -226,7 +350,7 @@ function Header() {
 
 export default Header;
 
-function MenuItem({ item }: { item: IHeaderMenu }) {
+function MenuItem({ item, secondaryHeader }: { item: IHeaderMenu; secondaryHeader: boolean }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -254,18 +378,20 @@ function MenuItem({ item }: { item: IHeaderMenu }) {
       <div className="relative group">
         {item?.children ? (
           <NavigationMenuTrigger
-            className={
-              "rounded-full text-white hover:text-foreground px-4 py-0.5 h-fit text-base active:text-foreground focus:text-foreground cursor-pointer"
-            }
+            className={cn(
+              "rounded-full text-white hover:text-foreground px-4 py-0.5 h-fit text-base active:text-foreground focus:text-foreground cursor-pointer transition duration-100",
+              secondaryHeader ? "text-foreground" : "text-white",
+            )}
           >
             {item.title} {item?.children && <PlusIcon className="relative top-0 size-3" aria-hidden="true" />}
           </NavigationMenuTrigger>
         ) : (
           <NavigationMenuLink
             href={item?.slug}
-            className={
-              "rounded-full text-white hover:text-foreground px-4 py-0.5 h-fit text-base active:text-foreground focus:text-foreground cursor-pointer"
-            }
+            className={cn(
+              "rounded-full text-white hover:text-foreground px-4 py-0.5 h-fit text-base active:text-foreground focus:text-foreground cursor-pointer",
+              secondaryHeader ? "text-foreground" : "text-white",
+            )}
           >
             {item.title}
           </NavigationMenuLink>
