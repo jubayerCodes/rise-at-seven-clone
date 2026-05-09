@@ -13,8 +13,8 @@ function OffCanvas() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className={"h-screen max-w-[100vw] bg-transparent p-2"} showCloseButton={false}>
-        <div className="bg-foreground/80 rounded-3xl p-4 flex flex-col justify-between">
+      <DialogContent className={"h-screen max-w-[100vw] bg-transparent p-2 z-10000"} showCloseButton={false}>
+        <div className="bg-foreground/80 backdrop-blur-sm rounded-3xl p-4 flex flex-col justify-between">
           <div>
             <div className="flex justify-between">
               <FooterLogo className="w-32 text-white pt-1" />
