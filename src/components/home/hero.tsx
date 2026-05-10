@@ -23,12 +23,19 @@ import brand8 from "@/assets/img/brands/reddit.webp";
 import brand9 from "@/assets/img/brands/amazon.webp";
 import Link from "next/link";
 import FlipButton from "../shared/flip-button";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [heroBg, setHeroBg] = useState("");
+
   const heroBgs = [hero1, hero2, hero3];
 
-  // eslint-disable-next-line react-hooks/purity
-  const heroBg = heroBgs[Math.floor(Math.random() * heroBgs.length)];
+  useEffect(() => {
+    const newBg = () => heroBgs[Math.floor(Math.random() * heroBgs.length)].src;
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHeroBg(newBg);
+  }, [heroBgs]);
 
   const awards = [award1, award2, award3, award4];
 
@@ -38,7 +45,9 @@ const Hero = () => {
     <section className="px-2 pt-2">
       <div className="bg-[#B2F6E3] flex rounded-full hover:rounded-md justify-center py-1 mb-2 w-full">
         <Link href={"#"} className="w-full">
-          <FlipButton className={"p-0 h-fit bg-transparent text-xs xl:text-sm tracking-tighter font-semibold text-center w-full"}>
+          <FlipButton
+            className={"p-0 h-fit bg-transparent text-xs xl:text-sm tracking-tighter font-semibold text-center w-full"}
+          >
             🚨 The Category Leaderboard - Live Now
           </FlipButton>
         </Link>
@@ -46,7 +55,7 @@ const Hero = () => {
       <div
         className="rounded-2xl bg-no-repeat bg-cover bg-center overflow-hidden"
         style={{
-          backgroundImage: `url("${heroBg.src}")`,
+          backgroundImage: `url("${heroBg}")`,
           height: "calc(100dvh - 1rem)",
         }}
       >
@@ -74,7 +83,7 @@ const Hero = () => {
           <HeadingWithImage
             line1="We Create"
             line2="Category Leaders"
-            imageUrl={heroBg.src}
+            imageUrl={heroBg}
             imageAlt="hero image"
             className="text-center"
             textClassName="text-white text-6xl xl:text-[120px] font-semibold justify-center"
