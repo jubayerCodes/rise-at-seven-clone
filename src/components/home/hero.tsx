@@ -28,14 +28,13 @@ import { useEffect, useState } from "react";
 const Hero = () => {
   const [heroBg, setHeroBg] = useState("");
 
-  const heroBgs = [hero1, hero2, hero3];
-
   useEffect(() => {
+    const heroBgs = [hero1, hero2, hero3];
     const newBg = () => heroBgs[Math.floor(Math.random() * heroBgs.length)].src;
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setHeroBg(newBg);
-  }, [heroBgs]);
+  }, []);
 
   const awards = [award1, award2, award3, award4];
 
@@ -87,7 +86,7 @@ const Hero = () => {
             imageAlt="hero image"
             className="text-center"
             textClassName="text-white text-6xl xl:text-[120px] font-semibold justify-center"
-            imageClassName="rounded-xl xl:rounded-2xl"
+            imageClassName="rounded-xl xl:rounded-2xl max-w-[60px] xl:max-w-[120px]!"
             animDelay={0.3}
           />
 
